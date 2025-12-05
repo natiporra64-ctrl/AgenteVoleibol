@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agente de Voleibol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 900px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            color: #0891b2;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .select-wrapper select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #06b6d4;
+            font-size: 1em;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .result-container {
+            max-width: 900px;
+            width: 100%;
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+        }
+
+        .result-label {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px 15px 0 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .result {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .result-text {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0891b2;
+            text-align: center;
+        }
+
+        .lists-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .list-box {
+            background: #f0fdff;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #a5f3fc;
+        }
+
+        .list-box h3 {
+            color: #0891b2;
+            margin-bottom: 15px;
+        }
+
+        .list-box ul {
+            list-style: none;
+        }
+
+        .list-box li {
+            border-bottom: 1px solid #a5f3fc;
+            padding: 8px 0;
+            color: #0e7490;
+        }
+
+        .list-box li:last-child {
+            border-bottom: none;
+        }
+
+        .result-container-inner {
+            margin: 30px 0;
+            display: none;
+        }
+
+        .result-container-inner.show {
+            display: block;
+        }
+
+        .result-label-inner {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px 15px 0 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .result-inner {
+            background: #f0fdff;
+            border: 2px solid #06b6d4;
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+        }
+
+        .result-text-inner {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0891b2;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>AGENTE DE VOLEIBOL 🏐</h1>
+    </div>
+
+    <div class="content">
+
+        <!-- PERCEPCIÓN 1 -->
+        <div class="section">
+            <div class="section-title">PERCEPCIÓN 1: Estado del Jugador</div>
+            <div class="select-wrapper">
+                <select id="percepcion1">
+                    <option value="">Selecciona la percepción</option>
+                    <option value="balon_cerca">Balón cerca</option>
+                    <option value="balon_alto">Balón alto</option>
+                    <option value="en_saque">En saque</option>
+                    <option value="en_defensa">En defensa</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- PERCEPCIÓN 2 -->
+        <div class="section">
+            <div class="section-title">PERCEPCIÓN 2: Regla del Juego</div>
+            <div class="select-wrapper">
+                <select id="percepcion2">
+                    <option value="">Selecciona la percepción</option>
+                    <option value="compañero_libre">Compañero libre</option>
+                    <option value="sin_compañeros">Sin compañeros</option>
+                    <option value="cerca_red">Cerca de la red</option>
+                    <option value="lejos_red">Lejos de la red</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- BOTÓN -->
+        <div class="btn-container">
+            <button class="btn" onclick="obtenerAccion()">OBTENER ACCIÓN</button>
+        </div>
+
+        <!-- RESULTADO DENTRO DE LA CARTA -->
+        <div class="result-container-inner" id="resultadoInner">
+            <div class="result-label-inner">ACCIÓN (Resultado de las dos percepciones)</div>
+            <div class="result-inner">
+                <div class="result-text-inner" id="accionTextoInner"></div>
+            </div>
+        </div>
+
+        <!-- LISTAS -->
+        <div class="lists-container">
+            <div class="list-box">
+                <h3>Estados del Jugador</h3>
+                <ul>
+                    <li>Balón cerca</li>
+                    <li>Balón alto</li>
+                    <li>En saque</li>
+                    <li>En defensa</li>
+                </ul>
+            </div>
+
+            <div class="list-box">
+                <h3>Reglas del Juego</h3>
+                <ul>
+                    <li>Compañero libre</li>
+                    <li>Sin compañeros</li>
+                    <li>Cerca de la red</li>
+                    <li>Lejos de la red</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ===================== SCRIPT LIMPIO ===================== -->
+<script>
+
+const reglasVoleibol = {
+  "balon_cerca,compañero_libre": "Pasar el balón al compañero",
+  "balon_cerca,sin_compañeros": "Controlar y avanzar solo",
+  "balon_cerca,cerca_red": "Recibir y preparar ataque en red",
+  "balon_cerca,lejos_red": "Recibir y enviar hacia la red",
+
+  "balon_alto,compañero_libre": "Saltar y pasar alto al compañero",
+  "balon_alto,sin_compañeros": "Saltar y controlar el balón",
+  "balon_alto,cerca_red": "Saltar y rematar",
+  "balon_alto,lejos_red": "Saltar y bloquear",
+
+  "en_saque,compañero_libre": "Sacar dirigido a zona débil",
+  "en_saque,sin_compañeros": "Sacar con estrategia individual",
+  "en_saque,cerca_red": "Sacar corto cerca de la red",
+  "en_saque,lejos_red": "Sacar profundo al fondo",
+
+  "en_defensa,compañero_libre": "Defender y pasar al compañero",
+  "en_defensa,sin_compañeros": "Defender solo toda la zona",
+  "en_defensa,cerca_red": "Defender zona delantera",
+  "en_defensa,lejos_red": "Defender zona trasera"
+};
+
+function obtenerAccion() {
+    const p1 = document.getElementById("percepcion1").value;
+    const p2 = document.getElementById("percepcion2").value;
+    const resultadoInner = document.getElementById("resultadoInner");
+    const accionTextoInner = document.getElementById("accionTextoInner");
+
+    if (!p1 || !p2) {
+        alert("Selecciona ambas percepciones");
+        return;
+    }
+
+    const clave = `${p1},${p2}`;
+    const accion = reglasVoleibol[clave] || "Combinación no encontrada";
+
+    accionTextoInner.textContent = accion;
+    resultadoInner.classList.add("show");
+}
+
+</script>
+
+</body>
+</html>
